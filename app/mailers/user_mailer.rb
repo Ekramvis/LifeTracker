@@ -6,4 +6,11 @@ class UserMailer < ActionMailer::Base
     @url = "http://localhost.com/users/signin"
     mail(to: @user.email, subject: "Achievement Unlocked!")
   end
+
+  def daily_update(user)
+    @user = user
+    @url = "http://localhost.com"
+    mail(to: @user.email, subject: "Time to update LifeTracker")
+  end
+
 end
