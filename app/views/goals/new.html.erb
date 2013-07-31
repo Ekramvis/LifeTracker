@@ -1,0 +1,5 @@
+<%= form_for(@goal) do |f| %> 
+  <%= hidden_field_tag "goal[user_id]", current_user.id %>
+  <%= f.text_field :objective %>
+  <%= f.submit "Save" %>
+<% end %>

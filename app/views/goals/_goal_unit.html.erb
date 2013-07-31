@@ -1,0 +1,52 @@
+<div class="goal-unit" id="goal-unit-<%= goal.id %>"> 
+  <div class="goal-header">
+    <h1><%= goal.objective %></h1>
+    <div id="delete-goal-<%= goal.id %>">
+      Delete Goal
+    </div>
+    <div class="goal-score">
+      Current Score: 
+    </div>
+  </div>
+
+
+  <div class="task-list">
+    <% goal.tasks.each do |task| %> 
+      <ul>
+        <li><%= task.description %></li>
+      </ul>
+    <% end %> 
+  </div>
+</div>
+
+<script>
+
+  $(document).ready(function () {
+
+    var $deleteGoalButton = $("#delete-goal-<%= goal.id %>")
+    var $goalUnit = $("#goal-unit-<%= goal.id %>")
+
+    $deleteGoalButton.on("click", function () {
+
+      var confirmDelete = confirm("Are you sure?");
+      console.log(confirmDelete)
+
+      if (confirmDelete === true) {
+        $.ajax({
+          url: "<%= goal_path(goal) %>",
+          type: "delete",
+          data: {
+            "id": "<%= goal.id %>"
+          },
+          success: function () {
+            $goalUnit.addClass("destroyed");
+          }
+        })
+      }
+      
+
+    })
+
+  })
+
+</script>

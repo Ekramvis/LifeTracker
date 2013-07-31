@@ -1,0 +1,41 @@
+<% @goals.each do |goal| %>
+  
+  <%= render partial: "goal_unit", locals: {goal: goal} %>
+
+<% end %>
+
+<div class="added-goals"></div>
+<div class="added-goal-forms"></div>
+
+<div class="add-goal">
+  <div class="btn" id="add-goal-button">Add Goal</div>
+</div>
+
+
+<script>
+  
+  $(document).ready(function () {
+
+    nextGoalCounter = 0
+    $addGoal = $("#add-goal-button")
+    $addedGoalForms = $(".added-goal-forms")
+
+    $addGoal.on("click", function () {
+
+      $.ajax({
+        url: "<%= new_goal_path %>",
+        type: "GET",
+        data: {
+          "goal_counter": nextGoalCounter
+        },
+        success: function (data) {
+          $addedGoalForms.append(data);
+          nextGoalCounter++
+        }
+      })
+
+    })
+
+  })
+
+</script>

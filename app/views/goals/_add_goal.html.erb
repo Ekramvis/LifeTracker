@@ -1,0 +1,37 @@
+<div class="embedded-goal-form" id="goal-form-<%= goal_counter %>"> 
+  <input type="textfield" name="goal[objective]" id="objective-field-<%= goal_counter %>">
+  <div class="btn" id="submit-goal-<%= goal_counter %>">Save</div>
+</div>
+
+
+<script>
+  
+  $(document).ready(function () {
+
+    var $submitGoal = $("#submit-goal-<%= goal_counter %>")
+    var $goalForm = $("#goal-form-<%= goal_counter %>")
+
+    $submitGoal.on("click", function (event) {
+      objectiveValue = $("#objective-field-<%= goal_counter %>").val()
+
+      $.ajax({
+        url: "<%= goals_path %>",
+        type: "post",
+        data: {
+          "goal[user_id]": "<%= current_user.id %>",
+          "goal[objective]": objectiveValue
+        },
+        success: function(data) {
+          $goalForm.addClass("destroyed");
+          $(".added-goals").append(data);
+        }
+
+
+      })
+    }) 
+
+
+
+  })
+  
+</script> 

@@ -22,5 +22,5 @@ class User < ActiveRecord::Base
     end
   end
 
-  has_many :goals
+  has_many :goals, dependent: :destroy
 end
