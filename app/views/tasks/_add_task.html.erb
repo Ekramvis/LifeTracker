@@ -1,5 +1,23 @@
 <div class="embedded-task-form" id="task-form-<%= task_id %>"> 
   <input type="textfield" name="task[description]" id="description-field-<%= task_id %>">
+
+  <select name="task[value]" id="value-field-<%= task_id %>" class="select-medium">
+    <option value="1">1 point</option>
+    <option value="2">2 points</option>
+    <option value="3">3 points</option>
+    <option value="4">4 points</option>
+    <option value="5">5 points</option>
+  </select>
+
+  <select name="task[frequency]" id="frequency-field-<%= task_id %>" class="select-small">
+    <option value="1">1x</option>
+    <option value="2">2x</option>
+    <option value="3">3x</option>
+    <option value="4">4x</option>
+    <option value="5">5x</option>
+    <option value="6">6x</option>
+    <option value="7">Daily</option>
+  </select>
   <div class="btn btn-small" id="submit-task-<%= task_id %>">Add</div>
 </div>
 
@@ -7,11 +25,13 @@
   
 $(document).ready(function () {
 
-  var $submitTask = $("#submit-task-<%= task_id %>")
-  var $taskForm = $("#task-form-<%= task_id %>")
+  var $submitTask = $("#submit-task-<%= task_id %>");
+  var $taskForm = $("#task-form-<%= task_id %>");
 
   $submitTask.on("click", function () {
-    var descriptionValue = $("#description-field-<%= task_id %>").val()
+    var descriptionValue = $("#description-field-<%= task_id %>").val();
+    var valueValue = parseInt($("#value-field-<%= task_id %>").val());
+    var frequencyValue = parseInt($("#frequency-field-<%= task_id %>").val());
 
     $.ajax({
       url: "<%= tasks_path %>",
@@ -19,8 +39,8 @@ $(document).ready(function () {
       data: {
         "task[goal_id]": "<%= goal.id %>",
         "task[description]": descriptionValue,
-        "task[value]": 5,
-        "task[frequency]": 7
+        "task[value]": valueValue,
+        "task[frequency]": frequencyValue
       },
       success: function(data) {
         $taskForm.addClass("destroyed");

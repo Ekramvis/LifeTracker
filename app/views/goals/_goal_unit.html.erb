@@ -8,11 +8,13 @@
 
 
   <div class="task-list">
+    <ul>
     <% goal.tasks.each do |task| %> 
-      <ul>
+      <li>
         <%= render partial: "tasks/task_unit", locals: {task: task, goal: goal} %>
-      </ul>
-    <% end %> 
+      </li>
+    <% end %>
+    </ul> 
   </div>
 
   <div id="added-tasks-<%= goal.id %>"></div>

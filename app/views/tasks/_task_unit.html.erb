@@ -1,14 +1,12 @@
 <div class="task-unit" id="task-unit-<%= task.id %>"> 
-  <li>
-    <%= task.description %>
-    <br>
-    <%= task.value.to_s + " Points" %> 
-    <br>
-    <%= task.frequency == 7 ? "Daily" : task.frequency.to_s + "x/week" %>
-    <div class="delete-task">
-      <i class="icon-trash icon-large" id="delete-task-<%= task.id %>"></i>
-    </div>
-  </li>
+  <%= task.description %>
+  <br>
+  <%= task.value.to_s + " Points" %> 
+  <br>
+  <%= task.frequency == 7 ? "Daily" : task.frequency.to_s + "x/week" %>
+  <div class="delete-task">
+    <i class="icon-trash icon-large" id="delete-task-<%= task.id %>"></i>
+  </div>
 </div>
 
 
