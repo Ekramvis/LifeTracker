@@ -22,5 +22,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def confirm!
+    welcome_message
+    super 
+  end
+
+  def welcome_message
+    UserMailer.welcome_email(self).deliver
+  end
+
   has_many :goals, dependent: :destroy
 end
