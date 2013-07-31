@@ -1,0 +1,38 @@
+<div class="embedded-task-form" id="task-form-<%= task_id %>"> 
+  <input type="textfield" name="task[description]" id="description-field-<%= task_id %>">
+  <div class="btn btn-small" id="submit-task-<%= task_id %>">Add</div>
+</div>
+
+<script>
+  
+$(document).ready(function () {
+
+  var $submitTask = $("#submit-task-<%= task_id %>")
+  var $taskForm = $("#task-form-<%= task_id %>")
+
+  $submitTask.on("click", function () {
+    var descriptionValue = $("#description-field-<%= task_id %>").val()
+
+    $.ajax({
+      url: "<%= tasks_path %>",
+      type: "post",
+      data: {
+        "task[goal_id]": "<%= goal.id %>",
+        "task[description]": descriptionValue,
+        "task[value]": 5,
+        "task[frequency]": 7
+      },
+      success: function(data) {
+        $taskForm.addClass("destroyed");
+        $("#added-tasks-<%= goal.id %>").append(data);
+      }
+
+
+    })
+  }) 
+
+
+
+  })
+  
+</script> 

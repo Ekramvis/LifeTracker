@@ -7,4 +7,5 @@ LifeTracker::Application.routes.draw do
     resources :tasks
   end
 
+  resources :tasks, only: [:new, :create]
 end

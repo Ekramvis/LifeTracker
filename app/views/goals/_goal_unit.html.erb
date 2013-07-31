@@ -1,11 +1,8 @@
 <div class="goal-unit" id="goal-unit-<%= goal.id %>"> 
   <div class="goal-header">
     <h1><%= goal.objective %></h1>
-    <div id="delete-goal-<%= goal.id %>">
+    <div class="badge badge-important delete-goal" id="delete-goal-<%= goal.id %>">
       Delete Goal
-    </div>
-    <div class="goal-score">
-      Current Score: 
     </div>
   </div>
 
@@ -13,18 +10,27 @@
   <div class="task-list">
     <% goal.tasks.each do |task| %> 
       <ul>
-        <li><%= task.description %></li>
+        <%= render partial: "tasks/task_unit", locals: {task: task, goal: goal} %>
       </ul>
     <% end %> 
   </div>
+
+  <div id="added-tasks-<%= goal.id %>"></div>
+  <div id="added-task-forms-<%= goal.id %>"></div>
+
+  <div class="add-task-button badge badge-success" id="add-task-button-<%= goal.id %>">
+    <i class="icon-plus"></i>Add Task
+  </div>
+
 </div>
 
 <script>
 
   $(document).ready(function () {
 
-    var $deleteGoalButton = $("#delete-goal-<%= goal.id %>")
-    var $goalUnit = $("#goal-unit-<%= goal.id %>")
+    var $deleteGoalButton = $("#delete-goal-<%= goal.id %>");
+    var $goalUnit = $("#goal-unit-<%= goal.id %>");
+    
 
     $deleteGoalButton.on("click", function () {
 
@@ -43,9 +49,28 @@
           }
         })
       }
-      
+    })
+
+    
+    var $addTask = $("#add-task-button-<%= goal.id %>")
+    var $addedTaskForms = $("#added-task-forms-<%= goal.id %>")
+
+    $addTask.on("click", function () {
+
+      $.ajax({
+        url: "<%= new_task_path %>",
+        type: "GET",
+        data: {
+          "goal_id": "<%= goal.id %>"
+        },
+        success: function (data) {
+          $addedTaskForms.append(data);
+        }
+      })
 
     })
+
+
 
   })
 
