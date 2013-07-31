@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730003420) do
+ActiveRecord::Schema.define(:version => 20130731040332) do
 
   create_table "goals", :force => true do |t|
     t.string   "objective"
@@ -24,12 +24,11 @@ ActiveRecord::Schema.define(:version => 20130730003420) do
 
   create_table "tasks", :force => true do |t|
     t.string   "description"
-    t.string   "frequency"
     t.integer  "value"
-    t.integer  "cap"
     t.integer  "goal_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "frequency"
   end
 
   add_index "tasks", ["goal_id"], :name => "index_tasks_on_goal_id"
