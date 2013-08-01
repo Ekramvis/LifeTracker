@@ -1,16 +1,16 @@
 class UserMailer < ActionMailer::Base
-  default from: "angelo@lifetracker.com"
+  default from: "angelo@superawesome.me"
 
   def welcome_email(user)
     @user = user
-    @url = "http://localhost.com/users/signin"
-    mail(to: @user.email, subject: "Achievement Unlocked!")
+    @url = "http://superawesome.me"
+    mail(to: @user.email, subject: "Level Up!")
   end
 
   def daily_update(user)
     @user = user
-    @url = "http://localhost.com"
-    mail(to: @user.email, subject: "Time to update LifeTracker")
+    @url = "http://superawesome.me"
+    mail(to: @user.email, subject: "SuperAwesomeYou Time!")
   end
 
 end
