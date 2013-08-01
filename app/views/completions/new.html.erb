@@ -1,0 +1,8 @@
+<%= form_for [@task, @completion] do |f| %>
+  <%= hidden_field_tag "completion[task_id]", @task.id %>
+  <%= hidden_field_tag "completion[date_completed]", Date.today %>
+
+  <%= f.submit "Task Complete!" %>
+  
+
+<% end %>

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   validates :username, :uniqueness => { :case_sensitive => false }
 
+  has_many :goals, dependent: :destroy
+  has_many :tasks, through: :goals
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -31,5 +33,35 @@ class User < ActiveRecord::Base
     UserMailer.welcome_email(self).deliver
   end
 
-  has_many :goals, dependent: :destroy
+  
+  def total_possible_points_per_week
+    total_points = 0
+
+    self.tasks.each do |task| 
+      total_points += (task.value * task.frequency)
+    end
+
+    total_points
+  end
+
+  # def points_earned_last_7_days
+  #   points_earned = 0
+
+  #   self.tasks.each do |task|
+  #     last_completions = []
+  #     last_completions += task.completions.select(date_completed ) ", Date.today, Date.today - 6.days)
+  #     # last_completions += task.completions.where("date_completed = ?", Date.today - 1.days)
+      # last_completions += task.completions.where("date_completed = ?", Date.today - 2.days)
+      # last_completions += task.completions.where("date_completed = ?", Date.today - 3.days)
+      # last_completions += task.completions.where("date_completed = ?", Date.today - 4.days)
+      # last_completions += task.completions.where("date_completed = ?", Date.today - 5.days)
+      # last_completions += task.completions.where("date_completed = ?", Date.today - 6.days)
+  #     points_earned += task.value * last_completions.size
+  #   end
+
+  #   points_earned
+  # end
+
+
+
 end
