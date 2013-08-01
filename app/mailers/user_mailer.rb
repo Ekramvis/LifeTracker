@@ -3,13 +3,13 @@ class UserMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    @url = "http://superawesome.me"
+    @url = "http://www.superawesome.me"
     mail(to: @user.email, subject: "Level Up!")
   end
 
   def daily_update(user)
     @user = user
-    @url = "http://superawesome.me"
+    @url = "http://www.superawesome.me"
     mail(to: @user.email, subject: "SuperAwesomeYou Time!")
   end
 
