@@ -1,10 +1,11 @@
-<% @goals.each do |goal| %>
-  
-  <%= render partial: "goal_unit", locals: {goal: goal} %>
+<div class="goals-list">
+  <% @goals.each do |goal| %>
+    <%= render partial: "goal_unit", locals: {goal: goal} %>
+  <% end %>
 
-<% end %>
+  <div class="added-goals"></div>
+</div>
 
-<div class="added-goals"></div>
 <div class="added-goal-forms"></div>
 
 <div class="add-goal">

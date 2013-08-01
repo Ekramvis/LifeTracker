@@ -97,6 +97,16 @@ ul.hmenu li {
   cursor: pointer;
 }
 
+.add-task-button:hover {
+  background: green;
+  cursor: pointer;
+}
+
+
 .goal-unit {
   padding-bottom: 20px;
+}
+
+.editable {
+  background: red;
 }
