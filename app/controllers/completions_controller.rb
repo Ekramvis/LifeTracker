@@ -11,7 +11,9 @@ class CompletionsController < ApplicationController
 
     if @completion.save
       if request.xhr? 
-        render nothing: true 
+        task_id = params[:completion][:task_id].to_i
+        date_completed = params[:completion][:date_completed]
+        render partial: "completion_confirm", locals: {task_id: task_id, date_completed: date_completed}
       else
         redirect_to root_url
       end
@@ -19,5 +21,13 @@ class CompletionsController < ApplicationController
       render :new
     end
   end
+
+  def completed
+    task_id = params[:completion][:task_id].to_i
+    date_completed = params[:completion][:date_completed]
+    
+    render partial: "completion_confirm", locals: {task_id: task_id, date_completed: date_completed}
+  end
+
 
 end 

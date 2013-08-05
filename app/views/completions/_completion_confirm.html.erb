@@ -1,0 +1,35 @@
+<div class="completion-confirm"> 
+  <% if Completion.where(task_id: task_id, date_completed: date_completed)[0] %>
+    <h2>Done!</h2>
+  <% else %>
+    <div>
+      <input type="checkbox" id="completed-task-<%= task_id %>"> I did this!
+    </div>
+  <% end %>
+</div>
+
+<script>
+
+  $(document).ready(function () {
+    var $completedBox = $("#completed-task-<%= task_id %>")
+
+    $completedBox.on("click", function () {
+      $.ajax({
+        url: "<%= completions_path %>",
+        type: "post",
+        data: {
+          "completion[task_id]": "<%= task_id %>",
+          "completion[date_completed]" : "<%= date_completed %>"
+        },
+        success: function (data) {
+          $completedBox.attr("disabled", true);
+          var $completedStatus = $("#completed-status-<%= task_id %>")
+          $completedStatus.empty();
+          $completedStatus.html(data)
+        } 
+      })
+    })
+
+  })
+
+</script>

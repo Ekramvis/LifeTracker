@@ -56,6 +56,11 @@ h1 {
   font-weight: bold;
 }
 
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 a {
   text-decoration: none;
 }
@@ -87,6 +92,9 @@ ul.hmenu li {
   width: 110px;
 }
 
+.select-large {
+  width: 150px;
+}
 
 
 
@@ -104,9 +112,23 @@ ul.hmenu li {
 
 
 .goal-unit {
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid black;
 }
 
 .editable {
   background: red;
+}
+
+
+
+.task-unit {
+  float: left;
+  margin-left: 40px;
+  margin-right: 10px;
+}
+
+.completion-confirm > h2 {
+  color: green;
 }

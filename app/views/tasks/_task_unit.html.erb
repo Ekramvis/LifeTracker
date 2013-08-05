@@ -6,37 +6,67 @@
   <%= task.frequency == 7 ? "Daily" : task.frequency.to_s + "x/week" %>
 
   <div class="completed-status" id="completed-status-<%= task.id %>" >
-    <% if task.completions.last %>
-      <%= "completed" if task.completions.last.date_completed == Date.current %>
-    <% end %>
+    <%= render partial: "/completions/completion_confirm", locals: { date_completed: Date.today, task_id: task.id } %>
   </div> 
 
+  <br>
   <div class="delete-task">
     <i class="icon-trash icon-large" id="delete-task-<%= task.id %>"></i>
   </div>
+  <br>
+
 </div>
+
 
 
 <script>
 
   $(document).ready(function () { 
-      
-      var $deleteTaskButton = $("#delete-task-<%= task.id %>")
-      var $taskUnit = $("#task-unit-<%= task.id %>")
+    
+    var $deleteTaskButton = $("#delete-task-<%= task.id %>")
+    var $taskUnit = $("#task-unit-<%= task.id %>")
 
-      $deleteTaskButton.on("click", function () {
+    $deleteTaskButton.on("click", function () {
 
-        $.ajax({
-          url: "<%= goal_task_path(goal, task) %>",
-          type: "delete",
-          data: {
-            "id": "<%= task.id %>"
-          },
-          success: function () {
-            $taskUnit.addClass("destroyed");
-          }
-        })
+      $.ajax({
+        url: "<%= goal_task_path(goal, task) %>",
+        type: "delete",
+        data: {
+          "id": "<%= task.id %>"
+        },
+        success: function () {
+          $taskUnit.addClass("destroyed");
+        }
       })
+    })
+
+    var currentDate = $("#date-selector").val()
+
+    var $dateSelector = $("#date-selector")
+    var $completedStatus = $("#completed-status-<%= task.id %>")
+
+    $dateSelector.on("change", function () {
+
+      currentDate = $("#date-selector").val()
+      
+      $.ajax({
+        url: "./completions/completed",
+        type: "post",
+        data: {
+          "completion[task_id]": "<%= task.id %>",
+          "completion[date_completed]": currentDate
+        },
+        success: function (data) {
+          $completedStatus.empty();
+          $completedStatus.html(data);
+        }
+      })
+
+    })
+
+ 
+
+
 
   })
 
