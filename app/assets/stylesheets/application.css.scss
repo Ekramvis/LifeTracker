@@ -49,6 +49,7 @@ div, a, img, p, h1, h2, h3, ul, li {
 body {
   font-family: sans-serif;
   font-size: 16px;
+  background: #C8F7FA;
 }
 
 h1 {
@@ -65,8 +66,21 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 ul {
   list-style: none;
+}
+
+
+/* HEADER */
+
+body > header {
+  background: white;
+  border-bottom: 10px solid #D6D3DE;
+  margin-bottom: 20px;
 }
 
 
@@ -81,6 +95,17 @@ ul.hmenu {
 ul.hmenu li {
   display: inline;  
 }
+
+.notice {
+  font-weight: bold;
+  background: #F7FABE;
+  width: 200px;
+  text-align: center;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 
 /* FORMS */
 
@@ -110,15 +135,30 @@ ul.hmenu li {
   cursor: pointer;
 }
 
+.single-goal {
+  margin-bottom: 70px;
+  background: #C8F7FA;
+}
 
 .goal-unit {
-  padding-top: 10px;
+  padding-top: 15px;
+  padding-left: 50px;
   padding-bottom: 50px;
-  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  background: #F7FABE;
+  border: 10px solid #D6D3DE;
+  -webkit-border-radius: 10px;
+  -webkit-border-top-left-radius: 100px;
+  -moz-border-radius: 10px;
+  -moz-border-radius-topleft: 100px;
+  border-radius: 10px;
+  border-top-left-radius: 100px;
+
 }
 
 .editable {
-  background: red;
+  
 }
 
 
@@ -131,4 +171,23 @@ ul.hmenu li {
 
 .completion-confirm > h2 {
   color: green;
+}
+
+
+.goals-header {
+  margin-bottom: 20px;
+}
+
+#date-selector-container {
+  float: right;
+}
+
+.goals-list {
+  
+}
+
+
+.goals-index {
+  width: 1000px;
+  margin: auto;
 }
