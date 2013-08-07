@@ -1,6 +1,6 @@
 <div class="embedded-task-form" id="task-form-<%= task_id %>"> 
   <input type="textfield" name="task[description]" id="description-field-<%= task_id %>">
-
+  <br>
   <select name="task[value]" id="value-field-<%= task_id %>" class="select-medium">
     <option value="1">1 point</option>
     <option value="2">2 points</option>
@@ -8,7 +8,6 @@
     <option value="4">4 points</option>
     <option value="5">5 points</option>
   </select>
-
   <select name="task[frequency]" id="frequency-field-<%= task_id %>" class="select-small">
     <option value="1">1x</option>
     <option value="2">2x</option>
@@ -19,6 +18,7 @@
     <option value="7">Daily</option>
   </select>
   <div class="btn btn-small" id="submit-task-<%= task_id %>">Add</div>
+  <i class="icon-remove icon-red" id="remove-task-form-<%= task_id %>"></i>
 </div>
 
 <script>
@@ -27,6 +27,7 @@ $(document).ready(function () {
 
   var $submitTask = $("#submit-task-<%= task_id %>");
   var $taskForm = $("#task-form-<%= task_id %>");
+  var $removeTaskForm = $("#remove-task-form-<%= task_id %>")
 
   $submitTask.on("click", function () {
     var descriptionValue = $("#description-field-<%= task_id %>").val();
@@ -46,13 +47,14 @@ $(document).ready(function () {
         $taskForm.addClass("destroyed");
         $("#added-tasks-<%= goal.id %>").append(data);
       }
-
-
     })
   }) 
 
-
-
+  $removeTaskForm.on("click", function () {
+    $taskForm.addClass("destroyed");
   })
-  
+
+
+})
+    
 </script> 

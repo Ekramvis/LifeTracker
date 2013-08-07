@@ -1,6 +1,7 @@
 <div class="embedded-goal-form" id="goal-form-<%= goal_counter %>"> 
   <input type="textfield" name="goal[objective]" id="objective-field-<%= goal_counter %>">
   <div class="btn" id="submit-goal-<%= goal_counter %>">Save</div>
+  <i class="icon-remove icon-white" id="remove-goal-form-<%= goal_counter %>"></i>
 </div>
 
 
@@ -10,6 +11,7 @@
 
     var $submitGoal = $("#submit-goal-<%= goal_counter %>")
     var $goalForm = $("#goal-form-<%= goal_counter %>")
+    var $removeGoalForm = $("#remove-goal-form-<%= goal_counter %>")
 
     $submitGoal.on("click", function (event) {
       objectiveValue = $("#objective-field-<%= goal_counter %>").val()
@@ -30,7 +32,9 @@
       })
     }) 
 
-
+    $removeGoalForm.on("click", function () {
+      $goalForm.addClass("destroyed");
+    })
 
   })
   

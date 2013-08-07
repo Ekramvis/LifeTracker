@@ -92,7 +92,7 @@ body > header {
 
 
 .header-logo {
-  padding-left: 450px;
+  padding-left: 425px;
   width: 200px;
   float: left;
 }
@@ -137,6 +137,10 @@ ul.hmenu li {
   margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
+  color: #B6BD6C;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 
@@ -170,9 +174,9 @@ ul.hmenu li {
 }
 
 .single-goal {
-  margin-bottom: 70px;
   background: #C8F7FA;
 }
+
 
 .goal-unit {
   padding-top: 15px;
@@ -180,19 +184,22 @@ ul.hmenu li {
   padding-bottom: 50px;
   margin-bottom: 20px;
   margin-top: 10px;
-  background: #F7FABE;
+  /*background: #F7FABE;*/
+  background: #F2F2F2;
   border: 10px solid #D6D3DE;
-  -webkit-border-radius: 10px;
-  -webkit-border-top-left-radius: 100px;
-  -moz-border-radius: 10px;
-  -moz-border-radius-topleft: 100px;
-  border-radius: 10px;
-  border-top-left-radius: 100px;
-
+  -webkit-border-radius: 100px;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius: 100px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-radius: 100px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .editable {
-  
+
 }
 
 
@@ -204,16 +211,21 @@ ul.hmenu li {
 }
 
 .completion-confirm > h2 {
-  color: green;
+  color: #84E8BE;
 }
 
 
 .goals-header {
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 #date-selector-container {
   float: right;
+}
+
+.new-goal-container {
+  float: left;
+  margin-bottom: 50px;
 }
 
 .goals-list {
@@ -224,4 +236,8 @@ ul.hmenu li {
 .goals-index {
   width: 1000px;
   margin: auto;
+}
+
+.goal-header {
+  padding-bottom: 10px
 }

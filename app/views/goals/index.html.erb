@@ -1,7 +1,18 @@
 <div class="goals-index">
 
   <div class="goals-header group"> 
+
+    <div class="new-goal-container"> 
+      <div class="add-goal group">
+        <div class="btn btn-info" id="add-goal-button">Add Goal</div>
+        <!-- <div class="btn btn-info" id="edit-goals-button">Edit Goals</div> -->
+      </div>
+
+      <div class="added-goal-forms"></div>
+    </div>
+
     
+
     <div id="date-selector-container">
       <select name="current_date" id="date-selector" class="select-large">
         <option value="<%= Date.today %>"><%= Date.today.strftime("%a %b ") + Date.today.strftime("%d").to_i.ordinalize %></option>
@@ -25,11 +36,9 @@
     <div class="added-goals"></div>
   </div>
 
-  <div class="added-goal-forms"></div>
+  
 
-  <div class="add-goal">
-    <div class="btn" id="add-goal-button">Add Goal</div>
-  </div>
+
 
 </div>
 
@@ -41,6 +50,7 @@
 
     var $addGoal = $("#add-goal-button")
     var $addedGoalForms = $(".added-goal-forms")
+    var $editGoalsButton = $("#edit-goals-button")
 
     $addGoal.on("click", function () {
 
@@ -56,6 +66,11 @@
         }
       })
 
+    })
+
+    $editGoalsButton.on("click", function () {
+      var $editable = $(".editable");
+      $editable.toggleClass("destroyed");
     })
 
   })
