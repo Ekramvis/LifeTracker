@@ -9,12 +9,14 @@
 <body>
 
 <header>
-  <div>
-    <h1>
-      <a href="<%= root_url %>">SuperAwesome.Me</a>
-    </h1>
+  <div class="header-container group">
+    <div class="header-logo"> 
+      <h1>
+        <a href="<%= root_url %>">SuperAwesome.Me</a>
+      </h1>
+    </div>
 
-    <nav>
+    <nav class="header-nav">
       <ul class="hmenu"> 
         <li><%= render 'devise/menu/registration_items' %></li>
         <li><%= render 'devise/menu/login_items' %></li>

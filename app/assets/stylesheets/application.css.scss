@@ -79,10 +79,43 @@ ul {
 
 body > header {
   background: white;
-  border-bottom: 10px solid #D6D3DE;
+  border-bottom: 3px solid #D6D3DE;
   margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 
+.header-container {
+  width: 1200px;
+  margin: auto;
+  padding-top: 10px;
+}
+
+
+.header-logo {
+  padding-left: 450px;
+  width: 200px;
+  float: left;
+}
+
+.header-logo > h1 {
+
+}
+
+.header-logo > h1 > a {
+  font-size: 36px;
+  color: #84E8BE;
+  display: block;
+}
+
+.header-logo > h1 > a {
+  text-decoration: none;
+}
+
+.header-nav {
+  float: right;
+  color: #84E8BE;
+  padding-right: 100px;
+}
 
 /* SIGNUP/IN/OUT */
 
@@ -96,7 +129,7 @@ ul.hmenu li {
   display: inline;  
 }
 
-.notice {
+.notice, .alert {
   font-weight: bold;
   background: #F7FABE;
   width: 200px;
@@ -105,6 +138,7 @@ ul.hmenu li {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
 
 
 /* FORMS */
