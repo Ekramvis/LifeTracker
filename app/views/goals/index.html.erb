@@ -2,6 +2,9 @@
 
   <div class="goals-header group"> 
 
+    <div class="current-score-container">
+      <h1 class="current-score"><%= current_user.trailing_7_day_average.to_s %>%</h1>
+    </div>
     <div class="new-goal-container"> 
       <div class="add-goal group">
         <div class="btn btn-info" id="add-goal-button">Add Goal</div>
@@ -16,7 +19,7 @@
     <div id="date-selector-container">
       <select name="current_date" id="date-selector" class="select-large">
         <option value="<%= Date.today %>"><%= Date.today.strftime("%a %b ") + Date.today.strftime("%d").to_i.ordinalize %></option>
-        <option value="<%= Date.today - 1.days %>"><%= (Date.today - 1.days).strftime("%a %b ") + (Date.today - 1.days).strftime("%d").to_i.ordinalize %></option>
+        <option value="<%= Date.today - 1.days %>"><%= (Date.today - 1.days).strftime("%a %b ") + (Date.today - 1.days).strftime("%d").to_i.ordinalize %></option>current-score-container
         <option value="<%= Date.today - 2.days %>"><%= (Date.today - 2.days).strftime("%a %b ") + (Date.today - 2.days).strftime("%d").to_i.ordinalize %></option>
         <option value="<%= Date.today - 3.days %>"><%= (Date.today - 3.days).strftime("%a %b ") + (Date.today - 3.days).strftime("%d").to_i.ordinalize %></option>
         <option value="<%= Date.today - 4.days %>"><%= (Date.today - 4.days).strftime("%a %b ") + (Date.today - 4.days).strftime("%d").to_i.ordinalize %></option>
@@ -35,8 +38,6 @@
     </div>
     <div class="added-goals"></div>
   </div>
-
-  
 
 
 
@@ -72,6 +73,9 @@
       var $editable = $(".editable");
       $editable.toggleClass("destroyed");
     })
+
+
+
 
   })
 

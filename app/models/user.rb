@@ -44,23 +44,31 @@ class User < ActiveRecord::Base
     total_points
   end
 
-  # def points_earned_last_7_days
-  #   points_earned = 0
+  def points_earned_last_7_days
+    points_earned = 0
 
-  #   self.tasks.each do |task|
-  #     last_completions = []
-  #     last_completions += task.completions.select(date_completed ) ", Date.today, Date.today - 6.days)
-  #     # last_completions += task.completions.where("date_completed = ?", Date.today - 1.days)
-      # last_completions += task.completions.where("date_completed = ?", Date.today - 2.days)
-      # last_completions += task.completions.where("date_completed = ?", Date.today - 3.days)
-      # last_completions += task.completions.where("date_completed = ?", Date.today - 4.days)
-      # last_completions += task.completions.where("date_completed = ?", Date.today - 5.days)
-      # last_completions += task.completions.where("date_completed = ?", Date.today - 6.days)
-  #     points_earned += task.value * last_completions.size
-  #   end
+    self.tasks.each do |task|
+      last_completions = []
+      # last_completions += task.completions.find_by_sql("SELECT * FROM tasks WHERE ", Date.today, Date.today - 6.days)
+      last_completions += task.completions.where("date_completed = ?", Date.today)
+      last_completions += task.completions.where("date_completed = ?", Date.today - 1.days)
+      last_completions += task.completions.where("date_completed = ?", Date.today - 2.days)
+      last_completions += task.completions.where("date_completed = ?", Date.today - 3.days)
+      last_completions += task.completions.where("date_completed = ?", Date.today - 4.days)
+      last_completions += task.completions.where("date_completed = ?", Date.today - 5.days)
+      last_completions += task.completions.where("date_completed = ?", Date.today - 6.days)
+      p last_completions
+      p task.value
+      points_earned += task.value * last_completions.size
+    end
 
-  #   points_earned
-  # end
+    points_earned
+  end
+
+
+  def trailing_7_day_average
+    ((self.points_earned_last_7_days * 100.00) / self.total_possible_points_per_week).round(2)
+  end
 
 
 
