@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130809030044) do
+ActiveRecord::Schema.define(:version => 20130809031854) do
 
   create_table "completions", :force => true do |t|
     t.integer  "task_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130809030044) do
     t.datetime "updated_at",                               :null => false
     t.string   "username"
     t.boolean  "subscribed",             :default => true
+    t.string   "unsubscribe_token"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

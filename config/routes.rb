@@ -14,4 +14,6 @@ LifeTracker::Application.routes.draw do
   resources :completions, only: [:new, :create, :destroy] 
 
   match "/completions/completed", to: "completions#completed", via: [:post]
+
+  match "/users/:unsubscribe_token/unsubscribe", to: "users#unsubscribe"
 end
