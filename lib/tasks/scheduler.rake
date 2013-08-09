@@ -14,7 +14,9 @@ namespace :checkin do
   desc "sends out a daily email update to each user"
   task :send_email => :environment do 
     User.all.each do |user|
-      UserMailer.daily_update(user).deliver
+      if user.subscribed == true
+        UserMailer.daily_update(user).deliver
+      end
     end
   end
 
