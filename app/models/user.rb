@@ -67,7 +67,11 @@ class User < ActiveRecord::Base
 
 
   def trailing_7_day_average
-    ((self.points_earned_last_7_days * 100.00) / self.total_possible_points_per_week).round(2)
+    if self.total_possible_points_per_week > 0
+      ((self.points_earned_last_7_days * 100.00) / self.total_possible_points_per_week).round(2).to_s + " %"
+    else
+      "0.00 %"
+    end
   end
 
 
