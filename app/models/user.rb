@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
       if days_tracked > 6
         total_points += (task.value * task.frequency) 
       else
-        limit = task.completions.find_by_sql("SELECT * FROM completions WHERE task_id = #{task.id} AND date_completed > #{Date.today - 6.days} LIMIT #{task.frequency}").size
+        limit = task.completions.select { |completion| completion.date_completed > (Date.today - 7.days)}.take(task.frequency).size
         total_points += (task.value * [task.frequency, limit].max) 
       end
     end
@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
 
     self.tasks.each do |task|
       last_completions = []
-      last_completions += task.completions.find_by_sql("SELECT * FROM completions WHERE task_id = #{task.id} AND date_completed > #{Date.today - 6.days} LIMIT #{task.frequency}")      
+      last_completions += task.completions.select { |completion| completion.date_completed > (Date.today - 7.days)}.take(task.frequency)          
       points_earned += task.value * last_completions.size
     end
 
