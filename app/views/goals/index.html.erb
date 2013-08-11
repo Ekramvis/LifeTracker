@@ -18,13 +18,13 @@
 
     <div id="date-selector-container">
       <select name="current_date" id="date-selector" class="select-large">
-        <option value="<%= Date.today %>"><%= Date.today.strftime("%a %b ") + Date.today.strftime("%d").to_i.ordinalize %></option>
-        <option value="<%= Date.today - 1.days %>"><%= (Date.today - 1.days).strftime("%a %b ") + (Date.today - 1.days).strftime("%d").to_i.ordinalize %></option>current-score-container
-        <option value="<%= Date.today - 2.days %>"><%= (Date.today - 2.days).strftime("%a %b ") + (Date.today - 2.days).strftime("%d").to_i.ordinalize %></option>
-        <option value="<%= Date.today - 3.days %>"><%= (Date.today - 3.days).strftime("%a %b ") + (Date.today - 3.days).strftime("%d").to_i.ordinalize %></option>
-        <option value="<%= Date.today - 4.days %>"><%= (Date.today - 4.days).strftime("%a %b ") + (Date.today - 4.days).strftime("%d").to_i.ordinalize %></option>
-        <option value="<%= Date.today - 5.days %>"><%= (Date.today - 5.days).strftime("%a %b ") + (Date.today - 5.days).strftime("%d").to_i.ordinalize %></option>
-        <option value="<%= Date.today - 6.days %>"><%= (Date.today - 6.days).strftime("%a %b ") + (Date.today - 6.days).strftime("%d").to_i.ordinalize %></option>
+        <option value="<%= localdate %>"><%= date_formatted %></option>
+        <option value="<%= localdate - 1.days %>"><%= date_formatted(1) %></option>
+        <option value="<%= localdate - 2.days %>"><%= date_formatted(2) %></option>
+        <option value="<%= localdate - 3.days %>"><%= date_formatted(3) %></option>
+        <option value="<%= localdate - 4.days %>"><%= date_formatted(4) %></option>
+        <option value="<%= localdate - 5.days %>"><%= date_formatted(5) %></option>
+        <option value="<%= localdate - 6.days %>"><%= date_formatted(6) %></option>
       </select> 
     </div>
 
@@ -46,8 +46,8 @@
 <script>
   
   $(document).ready(function () {
-    console.log("<%= Date.today %>")
-    console.log("<%= Time.now %>")
+    console.log("<%= localdate %>")
+    console.log("<%= Time.now.in_time_zone.to_date - 1.days %>")
     console.log("<%= Time.zone %>")
     console.log("<%= Time.now.in_time_zone %>")
     console.log("<%= cookies['browser.timezone'] %>")
