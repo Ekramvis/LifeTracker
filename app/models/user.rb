@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
          :token_authenticatable, :confirmable
 
   attr_accessible :username, :email, :password, :password_confirmation, 
-                  :remember_me, :login, :subscribed, :unsubscribe_token
+                  :remember_me, :login, :subscribed, :unsubscribe_token,
+                  :time_zone
 
   attr_accessor :login
 
@@ -72,35 +73,5 @@ class User < ActiveRecord::Base
       "0.00%"
     end
   end
-
-
-  def reported_average
-    total_points = 0
-
-    self.tasks.each do |task|
-      days_tracked = ((Time.now - task.created_at) / (60 * 60 * 24)).to_i
-      if days_tracked > 6
-        total_points += (task.value * task.frequency) 
-      else
-        limit = task.completions.select { |completion| completion.date_completed > (Time.now.to_date - 7.days)}.take(task.frequency).size
-        total_points += (task.value * [task.frequency, limit].max) 
-      end
-    end
-
-    points_earned = 0
-
-    self.tasks.each do |task|
-      last_completions = []
-      last_completions += task.completions.select { |completion| completion.date_completed > (Time.now.to_date - 7.days)}.take(task.frequency)          
-      points_earned += task.value * last_completions.size
-    end
-
-    if total_points > 0
-      ((points_earned * 100.00) / total_points).round(2).to_s + "%"
-    else
-      "0.00%"
-    end
-  end
-
 
 end
