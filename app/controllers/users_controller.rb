@@ -1,5 +1,4 @@
 class UsersController < ApplicationController 
-  around_filter :set_time_zone
 
   def unsubscribe
     @user = User.find_by_unsubscribe_token(params[:unsubscribe_token])

@@ -1,17 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-
-  private 
-
   def set_time_zone
     old_time_zone = Time.zone
-    Time.zone = browser_timezone if browser_timezone.present?
+    if browser_timezone.present?
+      Time.zone = browser_timezone 
+      puts "TIME WAS RESET!!"
+      puts Time.zone
+    end
+    puts "THIS CRAP WAS CALLED!!!"
     yield
   end
 
   def browser_timezone
     cookies["browser.timezone"]
   end
-  
+
 end

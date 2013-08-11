@@ -1,5 +1,4 @@
 class CompletionsController < ApplicationController 
-  around_filter :set_time_zone
 
   def new
     @completion = Completion.new

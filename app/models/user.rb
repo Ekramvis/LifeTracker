@@ -60,7 +60,6 @@ class User < ActiveRecord::Base
       points_earned += task.value * last_completions.size
     end
 
-    p points_earned
     points_earned
   end
 
