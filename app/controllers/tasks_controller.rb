@@ -1,5 +1,6 @@
 class TasksController < ApplicationController 
   before_filter :authenticate_user!
+  around_filter :set_time_zone
   
   def new
     puts "FUCCKK"
