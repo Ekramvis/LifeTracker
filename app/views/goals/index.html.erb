@@ -48,6 +48,8 @@
   $(document).ready(function () {
     console.log("<%= Date.today %>")
     console.log("<%= Time.now %>")
+    console.log("<%= Time.zone %>")
+    console.log("<%= Time.now.in_time_zone %>")
     console.log("<%= cookies['browser.timezone'] %>")
 
     var nextGoalCounter = 0
