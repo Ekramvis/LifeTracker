@@ -38,11 +38,11 @@ class User < ActiveRecord::Base
     total_points = 0
 
     self.tasks.each do |task|
-      days_tracked = ((Time.now - task.created_at) / (60 * 60 * 24)).to_i
+      days_tracked = ((Time.now.in_time_zone - task.created_at) / (60 * 60 * 24)).to_i
       if days_tracked > 6
         total_points += (task.value * task.frequency) 
       else
-        limit = task.completions.select { |completion| completion.date_completed > (Date.today - 7.days)}.take(task.frequency).size
+        limit = task.completions.select { |completion| completion.date_completed > (Time.now.in_time_zone.to_date - 7.days)}.take(task.frequency).size
         total_points += (task.value * [task.frequency, limit].max) 
       end
     end
@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
 
     self.tasks.each do |task|
       last_completions = []
-      last_completions += task.completions.select { |completion| completion.date_completed > (Date.today - 7.days)}.take(task.frequency)          
+      last_completions += task.completions.select { |completion| completion.date_completed > (Time.now.in_time_zone.to_date - 7.days)}.take(task.frequency)          
       points_earned += task.value * last_completions.size
     end
 

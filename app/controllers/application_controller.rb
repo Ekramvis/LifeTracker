@@ -5,10 +5,7 @@ class ApplicationController < ActionController::Base
     old_time_zone = Time.zone
     if browser_timezone.present?
       Time.zone = browser_timezone 
-      puts "TIME WAS RESET!!"
-      puts Time.zone
     end
-    puts "THIS CRAP WAS CALLED!!!"
     yield
   end
 

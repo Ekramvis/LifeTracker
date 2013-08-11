@@ -6,7 +6,7 @@
   <%= task.frequency == 7 ? "Daily" : task.frequency.to_s + "x/week" %>
 
   <div class="completed-status" id="completed-status-<%= task.id %>" >
-    <%= render partial: "/completions/completion_confirm", locals: { date_completed: Date.today, task_id: task.id } %>
+    <%= render partial: "/completions/completion_confirm", locals: { date_completed: Time.now.in_time_zone.to_date, task_id: task.id } %>
   </div> 
 
   <br>
