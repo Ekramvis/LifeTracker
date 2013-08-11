@@ -9,12 +9,13 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require font-awesome
  *= require jquery.ui.all
  *= require_tree .
  */
 
 @import "bootstrap";
-
+@import "font-awesome";
 
 /* RESET */
 
@@ -113,9 +114,12 @@ body > header {
 
 .header-nav {
   float: right;
-  color: #84E8BE;
+/*  color: #84E8BE;*/
   padding-right: 100px;
+  padding-top: 10px;
 }
+
+h
 
 /* SIGNUP/IN/OUT */
 
@@ -126,7 +130,12 @@ ul.hmenu {
 }
 
 ul.hmenu li {
-  display: inline;  
+  display: inline; 
+  padding-right: 5px;
+}
+
+.icon-cog, .icon-off {
+  color: #949494;
 }
 
 .notice, .alert {
@@ -141,6 +150,10 @@ ul.hmenu li {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+
+  -webkit-box-shadow: 0px 5px 8px rgba(50, 50, 50, 0.3);
+  -moz-box-shadow:    0px 5px 8px rgba(50, 50, 50, 0.3);
+  box-shadow:         0px 5px 8px rgba(50, 50, 50, 0.3);
 }
 
 .sign-in-container {
@@ -153,6 +166,10 @@ ul.hmenu li {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+
+  -webkit-box-shadow: 0px 5px 8px rgba(50, 50, 50, 0.8);
+  -moz-box-shadow:    0px 5px 8px rgba(50, 50, 50, 0.8);
+  box-shadow:         0px 5px 8px rgba(50, 50, 50, 0.8);
 }
 
 .sign-in-form {
@@ -164,6 +181,8 @@ ul.hmenu li {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+
+
 }
 
 .sign-in-form a {
@@ -185,9 +204,22 @@ ul.hmenu li {
 }
 
 input:focus { 
-  background-color: #EEF296;
+/*  background-color: #EEF296;*/
+  background-color: #FFFD9C
 }
 
+.sign-in-form input:focus { 
+  background-color: #EBEFF0;
+}
+
+.goal-unit input:focus {
+  background-color: #FFFD9C;
+}
+
+
+.icon-remove {
+  color: #696969;
+}
 
 /* GOALS INDEX */
 
@@ -212,18 +244,16 @@ input:focus {
   padding-bottom: 50px;
   margin-bottom: 20px;
   margin-top: 10px;
-  /*background: #F7FABE;*/
   background: #F2F2F2;
   border: 10px solid #D6D3DE;
-  -webkit-border-radius: 100px;
-  -webkit-border-bottom-right-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -moz-border-radius: 100px;
-  -moz-border-radius-bottomright: 10px;
-  -moz-border-radius-bottomleft: 10px;
-  border-radius: 100px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+  -webkit-box-shadow: 0px 5px 8px rgba(50, 50, 50, 0.8);
+  -moz-box-shadow:    0px 5px 8px rgba(50, 50, 50, 0.8);
+  box-shadow:         0px 5px 8px rgba(50, 50, 50, 0.8);
 }
 
 .editable {
@@ -255,7 +285,8 @@ input:focus {
 }
 
 .goal-header {
-  padding-bottom: 10px
+  padding-bottom: 10px;
+  color: #47DE9E;
 }
 
 
@@ -266,6 +297,13 @@ input:focus {
   color: #E01B5D;
 }
 
+.added-task-forms {
+  padding-top: 20px;
+}
+
+.embedded-task-form {
+  padding-top: 10px;
+}
 
 /* TASKS */
 
@@ -273,8 +311,11 @@ input:focus {
 .task-list .task-unit {
   margin-left: 40px;
   margin-right: 50px;
-  border-bottom: 1px solid black;
-  
+  border-bottom: 1px solid #D6D3DE; 
+}
+
+.task-list .task-unit:last-child {
+  border-bottom: 0px solid #D6D3DE; 
 }
 
 .completion-confirm > h2 {
