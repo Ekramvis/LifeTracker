@@ -16,7 +16,6 @@ namespace :checkin do
     User.all.each do |user|
       if user.subscribed == true
         if user.unsubscribe_token.nil?
-          puts "setting up new unsubscribe token"
           user.unsubscribe_token = SecureRandom.urlsafe_base64(8) 
           user.save!
         end
