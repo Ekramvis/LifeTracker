@@ -1,19 +1,19 @@
-<div class="task-unit" id="task-unit-<%= task.id %>"> 
-  <%= task.description %>
-  <br>
-  <%= task.value.to_s + " Points" %> 
-  <br>
-  <%= task.frequency == 7 ? "Daily" : task.frequency.to_s + "x/week" %>
-
+<div class="task-unit group" id="task-unit-<%= task.id %>"> 
+  <div class="task-description"> 
+    <%= task.description %>
+  </div>
+  <div class="task-points">
+    <%= task.value.to_s + " Points" %>
+  </div> 
+  <div class="task-frequency">
+    <%= task.frequency == 7 ? "Daily" : task.frequency.to_s + "x/week" %>
+  </div>
   <div class="completed-status" id="completed-status-<%= task.id %>" >
     <%= render partial: "/completions/completion_confirm", locals: { date_completed: Time.now.in_time_zone.to_date, task_id: task.id } %>
   </div> 
-
-  <br>
   <div class="delete-task">
     <i class="icon-trash icon-large editable" id="delete-task-<%= task.id %>"></i>
   </div>
-  <br>
 
 </div>
 

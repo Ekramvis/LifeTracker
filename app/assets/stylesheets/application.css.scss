@@ -231,18 +231,6 @@ input:focus {
 }
 
 
-
-.task-unit {
-  float: left;
-  margin-left: 40px;
-  margin-right: 10px;
-}
-
-.completion-confirm > h2 {
-  color: #84E8BE;
-}
-
-
 .goals-header {
   padding-bottom: 20px;
 }
@@ -277,3 +265,36 @@ input:focus {
   font-size: 36px;
   color: #E01B5D;
 }
+
+
+/* TASKS */
+
+
+.task-list .task-unit {
+  margin-left: 40px;
+  margin-right: 50px;
+  border-bottom: 1px solid black;
+  
+}
+
+.completion-confirm > h2 {
+  color: #84E8BE;
+}
+
+.task-description {
+  width: 300px;
+}
+
+.task-points, .task-frequency, .completed-status, .delete-task {
+  width: 110px; 
+}
+
+.task-description, .task-points, .task-frequency, .completed-status, .delete-task {
+  float: left;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 20px;
+  display: block;
+}
+
