@@ -184,6 +184,9 @@ ul.hmenu li {
   width: 150px;
 }
 
+input:focus { 
+  background-color: #EEF296;
+}
 
 
 /* GOALS INDEX */
@@ -269,7 +272,8 @@ ul.hmenu li {
 
 
 .current-score {
-  width: 200px;
+  width: 300px;
   margin: auto;
-  font-size: 50px;
+  font-size: 36px;
+  color: #E01B5D;
 }

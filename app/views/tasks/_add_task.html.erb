@@ -29,6 +29,17 @@ $(document).ready(function () {
   var $taskForm = $("#task-form-<%= task_id %>");
   var $removeTaskForm = $("#remove-task-form-<%= task_id %>")
 
+  $taskForm.keydown(function (event) {
+    if (event.keyCode === 13) {
+      var target = event.target.id.split("-");
+      target = target[(target.length - 1)];
+      var $submitTask = $("#submit-task-" + target);
+      $submitTask.click();
+      $taskForm.off();
+    }
+  })
+
+
   $submitTask.on("click", function () {
     var descriptionValue = $("#description-field-<%= task_id %>").val();
     var valueValue = parseInt($("#value-field-<%= task_id %>").val());
@@ -46,6 +57,18 @@ $(document).ready(function () {
       success: function(data) {
         $taskForm.addClass("destroyed");
         $("#added-tasks-<%= goal.id %>").append(data);
+
+        $.ajax({
+          url: "/users/average_score",
+          type: "get",
+          data: {},
+          success: function(data) {
+            var $newScore = $(".current-score-container")
+            $newScore.empty();
+            $newScore.html(data);
+          }
+        })
+
       }
     })
   }) 

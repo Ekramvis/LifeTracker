@@ -10,5 +10,13 @@ class UsersController < ApplicationController
 
   end
 
+  def average_score
+    if request.xhr?
+      render partial: "average_score"
+    else
+      redirect_to root_url
+    end
+  end
+
 
 end

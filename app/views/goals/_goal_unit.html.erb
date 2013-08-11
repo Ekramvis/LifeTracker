@@ -48,6 +48,18 @@
           },
           success: function () {
             $goalUnit.addClass("destroyed");
+
+            $.ajax({
+              url: "/users/average_score",
+              type: "get",
+              data: {},
+              success: function(data) {
+                var $newScore = $(".current-score-container")
+                $newScore.empty();
+                $newScore.html(data);
+              }
+            })
+
           }
         })
       }

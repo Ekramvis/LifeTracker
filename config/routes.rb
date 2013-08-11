@@ -16,4 +16,5 @@ LifeTracker::Application.routes.draw do
   match "/completions/completed", to: "completions#completed", via: [:post]
 
   match "/users/:unsubscribe_token/unsubscribe", to: "users#unsubscribe"
+  match "/users/average_score", to: "users#average_score"
 end

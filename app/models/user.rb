@@ -37,40 +37,40 @@ class User < ActiveRecord::Base
   def total_possible_points_per_week
     total_points = 0
 
-    self.tasks.each do |task| 
-      total_points += (task.value * task.frequency)
+    self.tasks.each do |task|
+      days_tracked = ((Time.now - task.created_at) / (60 * 60 * 24)).to_i
+      if days_tracked > 6
+        total_points += (task.value * task.frequency) 
+      else
+        limit = task.completions.find_by_sql("SELECT * FROM completions WHERE task_id = #{task.id} AND date_completed > #{Date.today - 6.days} LIMIT #{task.frequency}").size
+        total_points += (task.value * [task.frequency, limit].max) 
+      end
     end
 
     total_points
   end
+
 
   def points_earned_last_7_days
     points_earned = 0
 
     self.tasks.each do |task|
       last_completions = []
-      # last_completions += task.completions.find_by_sql("SELECT * FROM tasks WHERE ", Date.today, Date.today - 6.days)
-      last_completions += task.completions.where("date_completed = ?", Date.today)
-      last_completions += task.completions.where("date_completed = ?", Date.today - 1.days)
-      last_completions += task.completions.where("date_completed = ?", Date.today - 2.days)
-      last_completions += task.completions.where("date_completed = ?", Date.today - 3.days)
-      last_completions += task.completions.where("date_completed = ?", Date.today - 4.days)
-      last_completions += task.completions.where("date_completed = ?", Date.today - 5.days)
-      last_completions += task.completions.where("date_completed = ?", Date.today - 6.days)
-      p last_completions
-      p task.value
+      last_completions += task.completions.find_by_sql("SELECT * FROM completions WHERE task_id = #{task.id} AND date_completed > #{Date.today - 6.days} LIMIT #{task.frequency}")      
       points_earned += task.value * last_completions.size
     end
 
+    p points_earned
     points_earned
   end
 
 
   def trailing_7_day_average
+
     if self.total_possible_points_per_week > 0
-      ((self.points_earned_last_7_days * 100.00) / self.total_possible_points_per_week).round(2).to_s + " %"
+      ((self.points_earned_last_7_days * 100.00) / self.total_possible_points_per_week).round(2).to_s + "%"
     else
-      "0.00 %"
+      "0.00%"
     end
   end
 
