@@ -48,10 +48,6 @@
   $(document).ready(function () {
     console.log("<%= Date.today %>")
     console.log("<%= Time.now %>")
-    <% cookies.each do |cookie| %>
-      console.log("<%= cookie %>");
-    <% end %>
-
     console.log("<%= cookies['browser.timezone'] %>")
 
     var nextGoalCounter = 0
