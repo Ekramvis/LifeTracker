@@ -8,7 +8,7 @@
     <div class="new-goal-container"> 
       <div class="add-goal group">
         <div class="btn btn-info" id="add-goal-button">Add Goal</div>
-        <!-- <div class="btn btn-info" id="edit-goals-button">Edit Goals</div> -->
+<!--         <div class="btn btn-info" id="edit-goals-button">Edit Goals</div> -->
       </div>
 
       <div class="added-goal-forms"></div>
@@ -48,10 +48,9 @@
   $(document).ready(function () {
 
     var nextGoalCounter = 0
-
     var $addGoal = $("#add-goal-button")
     var $addedGoalForms = $(".added-goal-forms")
-    var $editGoalsButton = $("#edit-goals-button")
+    
 
     $addGoal.on("click", function () {
 
@@ -69,12 +68,12 @@
 
     })
 
-    $editGoalsButton.on("click", function () {
-      var $editable = $(".editable");
-      $editable.toggleClass("destroyed");
-    })
 
-
+    // var $editGoalsButton = $("#edit-goals-button")
+    // $editGoalsButton.on("click", function () {
+    //   var $editable = $(".editable");
+    //   $editable.toggleClass("destroyed");
+    // })
 
 
   })

@@ -41,7 +41,7 @@ div, a, img, p, h1, h2, h3, ul, li {
 /* DESTROYED/INVISIBLE */
 
 .destroyed {
-  display: none;  
+  display: none;
 }
 
 
@@ -223,13 +223,22 @@ input:focus {
 
 /* GOALS INDEX */
 
+.delete-goal {
+  float: right;
+  margin-right: 45px;
+}
+
+.add-task-button {
+  margin-left: 40px;
+}
+
 .delete-goal:hover {
-  background: red;
+  background: #F7C6E5;
   cursor: pointer;
 }
 
 .add-task-button:hover {
-  background: green;
+  background: #C6F4F7;
   cursor: pointer;
 }
 
@@ -241,7 +250,7 @@ input:focus {
 .goal-unit {
   padding-top: 15px;
   padding-left: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   margin-bottom: 20px;
   margin-top: 10px;
   background: #F2F2F2;
@@ -297,11 +306,20 @@ input:focus {
   color: #E01B5D;
 }
 
+.current-score-header {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+  font-size: 24px;
+  color: #E01B5D;
+}
+
 .added-task-forms {
+  padding-left: 40px;
   padding-top: 20px;
 }
 
-.embedded-task-form {
+.embedded-goal-form, .embedded-task-form {
   padding-top: 10px;
 }
 
@@ -339,3 +357,6 @@ input:focus {
   display: block;
 }
 
+.task-points, .task-frequency, .completed-status, .delete-task {
+  text-align: center;
+}
