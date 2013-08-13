@@ -45,6 +45,10 @@ $(document).ready(function () {
     var valueValue = parseInt($("#value-field-<%= task_id %>").val());
     var frequencyValue = parseInt($("#frequency-field-<%= task_id %>").val());
 
+    if (descriptionValue === "") {
+      descriptionValue = "(add a description)"
+    }
+
     $.ajax({
       url: "<%= tasks_path %>",
       type: "post",

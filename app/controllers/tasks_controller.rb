@@ -29,12 +29,19 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
+    p params
+    @task = Task.find(params[:id])
 
+    if @task.update_attributes(params[:task])
+      if request.xhr?
+        render nothing: true
+      else
+        redirect_to root_url
+      end
+    else
+      render nothing: true
+    end
   end
 
   def destroy

@@ -361,3 +361,8 @@ input:focus {
 .task-points, .task-frequency, .completed-status, .delete-task {
   text-align: center;
 }
+
+
+.task-unit:hover {
+  cursor: pointer;
+}

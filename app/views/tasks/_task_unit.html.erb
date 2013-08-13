@@ -1,17 +1,34 @@
 <div class="task-unit group" id="task-unit-<%= task.id %>"> 
   <div class="task-description"> 
-    <%= task.description %>
+    <span class="viewMode"><%= task.description %></span>
+    <input class="editMode invisible" type="textfield" name="task[description]" id="description-field-<%= task.id %>" value="<%= task.description %>">
   </div>
   <div class="task-points">
-    <%= task.value.to_s + " Points" %>
+    <span class="viewMode"><%= task.value.to_s + " Points" %></span>
+    <select class="select-medium editMode invisible" name="task[value]" id="value-field-<%= task.id %>">
+      <option value="1" <%= "selected" if task.value == 1 %> >1 point</option>
+      <option value="2" <%= "selected" if task.value == 2 %> >2 points</option>
+      <option value="3" <%= "selected" if task.value == 3 %> >3 points</option>
+      <option value="4" <%= "selected" if task.value == 4 %> >4 points</option>
+      <option value="5" <%= "selected" if task.value == 5 %> >5 points</option>
+    </select>
   </div> 
   <div class="task-frequency">
-    <%= task.frequency == 7 ? "Daily" : task.frequency.to_s + "x/week" %>
+    <span class="viewMode"><%= task.frequency == 7 ? "Daily" : task.frequency.to_s + "x/week" %></span>
+    <select class="select-small editMode invisible" name="task[frequency]" id="frequency-field-<%= task.id %>">
+      <option value="1" <%= "selected" if task.frequency == 1 %> >1x</option>
+      <option value="2" <%= "selected" if task.frequency == 2 %> >2x</option>
+      <option value="3" <%= "selected" if task.frequency == 3 %> >3x</option>
+      <option value="4" <%= "selected" if task.frequency == 4 %> >4x</option>
+      <option value="5" <%= "selected" if task.frequency == 5 %> >5x</option>
+      <option value="6" <%= "selected" if task.frequency == 6 %> >6x</option>
+      <option value="7" <%= "selected" if task.frequency == 7 %> >Daily</option>
+    </select>
   </div>
   <div class="completed-status" id="completed-status-<%= task.id %>" >
-    <%= render partial: "/completions/completion_confirm", locals: { date_completed: Time.now.in_time_zone.to_date, task_id: task.id } %>
+    <span class="viewMode"><%= render partial: "/completions/completion_confirm", locals: { date_completed: Time.now.in_time_zone.to_date, task_id: task.id } %></span>
   </div> 
-  <div class="delete-task">
+  <div class="delete-task editMode invisible">
     <i class="icon-trash icon-large editable" id="delete-task-<%= task.id %>"></i>
   </div>
 
@@ -23,34 +40,8 @@
 
   $(document).ready(function () { 
     
-    var $deleteTaskButton = $("#delete-task-<%= task.id %>")
+    
     var $taskUnit = $("#task-unit-<%= task.id %>")
-
-    $deleteTaskButton.on("click", function () {
-
-      $.ajax({
-        url: "<%= goal_task_path(goal, task) %>",
-        type: "delete",
-        data: {
-          "id": "<%= task.id %>"
-        },
-        success: function () {
-          $taskUnit.addClass("destroyed");
-
-          $.ajax({
-            url: "/users/average_score",
-            type: "get",
-            data: {},
-            success: function(data) {
-              var $newScore = $(".current-score-container")
-              $newScore.empty();
-              $newScore.html(data);
-            }
-          })
-
-        }
-      })
-    })
 
     var currentDate = $("#date-selector").val()
 
@@ -75,6 +66,118 @@
       })
 
     })
+
+
+    function scoreUpdate() {
+      $.ajax({
+        url: "/users/average_score",
+        type: "get",
+        data: {},
+        success: function(data) {
+          var $newScore = $(".current-score-container")
+          $newScore.empty();
+          $newScore.html(data);
+        }
+      })
+    }
+
+    function editSubmit() {
+      var descriptionValue = $("#description-field-<%= task.id %>").val();
+      var valueValue = parseInt($("#value-field-<%= task.id %>").val());
+      var frequencyValue = parseInt($("#frequency-field-<%= task.id %>").val());
+
+      if (descriptionValue === "") {
+        descriptionValue = "(add a description)"
+      }
+      
+      $.ajax({
+        url: "<%= task_path(task) %>",
+        type: "put",
+        data: {
+          "task[description]": descriptionValue,
+          "task[value]": valueValue,
+          "task[frequency]": frequencyValue
+        },
+        success: function () {
+          var $description = $("#task-unit-<%= task.id %> .task-description .viewMode").empty()
+          $description.html(descriptionValue);
+          var $points = $("#task-unit-<%= task.id %> .task-points .viewMode").empty()
+          $points.html(valueValue + " Points");
+          var $frequency = $("#task-unit-<%= task.id %> .task-frequency .viewMode").empty()
+          if (frequencyValue === 7) {
+            $frequency.html("Daily");
+          }
+          else {
+            $frequency.html(frequencyValue + "x/week");
+          }
+
+          scoreUpdate();
+        }
+      })
+      
+
+      
+    }
+
+    
+
+    $taskUnit.on("dblclick", function () {
+      var $that = $(this); 
+      var $taskUnitViewable = $("#task-unit-<%= task.id %> .viewMode")
+      var $taskUnitEditable = $("#task-unit-<%= task.id %> .editMode")
+
+      $taskUnitViewable.addClass("destroyed");
+      $taskUnitEditable.removeClass("invisible");
+
+
+      function allowEdit (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      $that.on("click", allowEdit);
+
+      var deleted = false;
+
+      var $deleteTaskButton = $("#delete-task-<%= task.id %>")
+      $deleteTaskButton.on("click", function () {
+        deleted = true
+        $deleteTaskButton.off()
+        $.ajax({
+          url: "<%= goal_task_path(goal, task) %>",
+          type: "delete",
+          data: {
+            "id": "<%= task.id %>"
+          },
+          success: function () {
+            $taskUnit.addClass("destroyed");
+            scoreUpdate();
+          }
+        })
+      })
+
+      $taskUnit.keydown(function (event) {
+        if (event.keyCode === 13) {
+          $taskUnit.off("keydown");
+          $("html").click();
+        }
+      })
+
+      $("html").on("click", function () {
+        $deleteTaskButton.off()
+        $(this).off();
+        $that.off("click");
+        if (deleted === false) {
+          editSubmit();
+        }  
+        $taskUnitEditable.addClass("invisible");
+        $taskUnitViewable.removeClass("destroyed");
+      })
+
+    })
+
+
+
 
   })
 
