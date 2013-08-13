@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
   def daily_update(user)
     @user = user
     @url = "http://www.superawesome.me"
-    mail(to: @user.email, subject: "SuperAwesomeYou Time!")
+    mail(to: @user.email, subject: "You are #{@user.trailing_7_day_average} awesome!")
   end
 
 end
