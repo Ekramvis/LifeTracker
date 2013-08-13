@@ -51,6 +51,8 @@ body {
   font-family: sans-serif;
   font-size: 16px;
   background: #C8F7FA;
+/*  background:-webkit-gradient(linear, 100% 82%, 0% 0%, from(#6597C7), to(#EFDDEA));
+  height: 1000px;*/
 }
 
 h1 {
@@ -304,7 +306,8 @@ input:focus {
   width: 300px;
   margin: auto;
   font-size: 36px;
-  color: #E01B5D;
+/*  color: #FFCF69;*/
+  color: #FFAE00;
 }
 
 .current-score-header {
@@ -312,7 +315,8 @@ input:focus {
   margin: auto;
   text-align: center;
   font-size: 24px;
-  color: #E01B5D;
+/*  color: #FFCF69;*/
+  color: #FFAE00;
 }
 
 .added-task-forms {
