@@ -45,6 +45,22 @@ class User < ActiveRecord::Base
       else
         limit = task.completions.select { |completion| completion.date_completed > (Time.now.in_time_zone.to_date - 7.days)}.take(task.frequency).size
         total_points += (task.value * [task.frequency, limit].max) 
+
+        # last_completion_date = task.completions.max { |c| c.date_completed }.try(:date_completed)
+        # if last_completion_date 
+        #   days_from_first_completion = (Time.now.in_time_zone.to_date - last_completion_date).to_i
+        # else
+        #   days_from_first_completion = 1
+        # end
+        # limit = task.completions.select { |completion| completion.date_completed > (Time.now.in_time_zone.to_date - 7.days)}.take(task.frequency).size
+
+        # puts "limit is #{limit}"
+        # puts "days_from_first_completion is #{days_from_first_completion}"
+        # puts "last_completion_date is #{last_completion_date}"
+
+        # total_points += (task.value * [(task.frequency / (7.0 / days_from_first_completion) ).ceil, limit].max) 
+
+        # puts "total_points is #{total_points}"
       end
     end
 

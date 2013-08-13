@@ -2,7 +2,6 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
   
   def new
-    puts "FUCCKK"
     @task = Task.new
 
     @goal = Goal.find(params[:goal_id])
