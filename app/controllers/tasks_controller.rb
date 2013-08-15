@@ -16,7 +16,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
-
+    @current_date = params[:current_date]
+    
     if @task.save!
       if request.xhr?
         goal = Goal.find(@task.goal_id)

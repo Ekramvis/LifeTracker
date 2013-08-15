@@ -273,17 +273,13 @@ input:focus {
 }
 
 
-.goals-header {
-  padding-bottom: 20px;
-}
-
 #date-selector-container {
   float: right;
 }
 
 .new-goal-container {
   float: left;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .goals-list {
@@ -297,34 +293,55 @@ input:focus {
 }
 
 .goal-header {
-  padding-bottom: 10px;
   color: #47DE9E;
 }
 
 
 .current-score {
-  width: 300px;
+  width: 420px;
   margin: auto;
+  font-size: 50px;
+/*  color: #FFCF69;*/
+  color: #FFAE00;
+  padding-bottom: 20px;
+}
+
+.current-score-header {
+  width: 400px;
+  margin: auto;
+  text-align: center;
   font-size: 36px;
 /*  color: #FFCF69;*/
   color: #FFAE00;
 }
 
-.current-score-header {
-  width: 300px;
-  margin: auto;
-  text-align: center;
-  font-size: 24px;
-/*  color: #FFCF69;*/
-  color: #FFAE00;
+.add-goal {
+
 }
+
+#add-goal-button {
+  float: left;
+  padding-right: 20px;
+}
+
+.added-goal-forms {
+  padding-left: 120px;
+}
+
+.embedded-goal-form {
+  float: left;
+  padding-right: 25px;
+  padding-bottom: 5px;
+}
+
+
 
 .added-task-forms {
   padding-left: 40px;
   padding-top: 20px;
 }
 
-.embedded-goal-form, .embedded-task-form {
+.embedded-task-form {
   padding-top: 10px;
 }
 
@@ -369,4 +386,58 @@ input:focus {
 
 .task-unit:hover {
   cursor: pointer;
+}
+
+
+/* CARROUSEL */
+
+.carrousel-container {
+  width: 600px;
+  margin: auto; 
+}
+
+
+#carrousel {
+  float: left;
+  padding-left: 5px;
+  position: relative;
+  height: 80px;
+  width: 380px;
+  overflow: hidden;
+}
+
+#carrousel > ul {
+  left: 0px;
+  top: 0;
+  position: absolute;
+  list-style: none;
+}
+
+#carrousel > ul:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#carrousel > ul > li {
+  float: left;
+  width: 380px;
+  height: 80px;
+  font-size: 36px;
+  text-align: center;
+}
+
+#carrousel-nav-prev, #carrousel-nav-next {
+  float: left;
+  padding-left: 5px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  padding-top: 5px;
+  color: #FFAE00;
+}
+
+#carrousel-nav-prev {
+  padding-right: 10px;
+  padding-left: 65px;
 }

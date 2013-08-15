@@ -26,7 +26,7 @@
     </select>
   </div>
   <div class="completed-status" id="completed-status-<%= task.id %>" >
-    <span class="viewMode"><%= render partial: "/completions/completion_confirm", locals: { date_completed: Time.now.in_time_zone.to_date, task_id: task.id } %></span>
+    <span class="viewMode"><%= render partial: "/completions/completion_confirm", locals: { date_completed: @current_date || Time.now.in_time_zone.to_date, task_id: task.id } %></span>
   </div> 
   <div class="delete-task editMode invisible">
     <i class="icon-trash icon-large editable" id="delete-task-<%= task.id %>"></i>
@@ -39,7 +39,6 @@
 <script>
 
   $(document).ready(function () { 
-    
     
     var $taskUnit = $("#task-unit-<%= task.id %>")
 

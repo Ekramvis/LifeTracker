@@ -44,7 +44,7 @@ $(document).ready(function () {
     var descriptionValue = $("#description-field-<%= task_id %>").val();
     var valueValue = parseInt($("#value-field-<%= task_id %>").val());
     var frequencyValue = parseInt($("#frequency-field-<%= task_id %>").val());
-
+    var submittedDate = $("#date-selector").val()
     if (descriptionValue === "") {
       descriptionValue = "(add a description)"
     }
@@ -56,7 +56,8 @@ $(document).ready(function () {
         "task[goal_id]": "<%= goal.id %>",
         "task[description]": descriptionValue,
         "task[value]": valueValue,
-        "task[frequency]": frequencyValue
+        "task[frequency]": frequencyValue,
+        "current_date": submittedDate
       },
       success: function(data) {
         $taskForm.addClass("destroyed");

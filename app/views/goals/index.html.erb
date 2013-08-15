@@ -5,17 +5,33 @@
     <div class="current-score-container">
       <%= render partial: "users/average_score" %>
     </div>
+
+    <div class="carrousel-container group">
+      <div id="carrousel-nav-prev" class="invisible"><i class="icon-chevron-sign-left icon-2x"></i></div>
+      <div id="carrousel">
+        <ul>
+          <li><%= date_formatted %></li>
+          <li><%= date_formatted(1) %></li>
+          <li><%= date_formatted(2) %></li>
+          <li><%= date_formatted(3) %></li>
+          <li><%= date_formatted(4) %></li>
+          <li><%= date_formatted(5) %></li>
+          <li><%= date_formatted(6) %></li>
+        </ul>
+      </div>
+      <div id="carrousel-nav-next"><i class="icon-chevron-sign-right icon-2x"></i></div>
+    </div>
+
     <div class="new-goal-container"> 
       <div class="add-goal group">
         <div class="btn btn-warning" id="add-goal-button">Add Goal</div>
+        <div class="added-goal-forms group"></div>
       </div>
 
-      <div class="added-goal-forms"></div>
+      
     </div>
 
-    
-
-    <div id="date-selector-container">
+    <div id="date-selector-container" class="destroyed">
       <select name="current_date" id="date-selector" class="select-large">
         <option value="<%= localdate %>"><%= date_formatted %></option>
         <option value="<%= localdate - 1.days %>"><%= date_formatted(1) %></option>
@@ -28,6 +44,8 @@
     </div>
 
   </div>
+
+
 
   <div class="goals-list">
     <div class="single-goal">
@@ -43,8 +61,121 @@
 </div>
 
 <script>
-  
+
+  var dateCounter = 0
+
+  var Carrousel = (function(){
+    
+    var carrousel = $("#carrousel");
+    var itemsHolder = carrousel.find("> ul");
+    var items = itemsHolder.find("> li");
+    var itemWidth = items.first().width();
+    var currentItem = 0;
+    
+    var prevButton = $("#carrousel-nav-prev");
+    var nextButton = $("#carrousel-nav-next");
+    
+
+    var init = function(){
+      itemsHolder.css({"width": (items.length * itemWidth) + "px"});
+      bind();
+    };
+    
+    var bind = function(){
+      prevButton.on("click", prev);
+      nextButton.on("click", next);
+    }
+
+    var next = function(){
+      currentItem++;
+      dateCounter++
+      if(currentItem == items.length){
+        currentItem = 0;
+        dateCounter = 0;
+      }
+      
+      moveLeft();
+    };
+
+
+    var prev = function (){
+      
+      currentItem--;
+      dateCounter--
+      if (currentItem < 0){
+        currentItem = items.length - 1;
+        dateCounter = items.length - 1;
+      }
+
+      moveRight();
+    }
+    
+
+    var moveLeft = function(){    
+      leftPosition = currentItem * itemWidth * -1;
+      itemsHolder.animate({"left": leftPosition + "px"}, 100);
+    }
+    
+    var moveRight = function(){
+      leftPosition = currentItem * itemWidth * -1;
+      itemsHolder.animate({"left": leftPosition + "px"}, 100);
+    }
+
+
+    return {
+      init: init,
+      next: next,
+      prev: prev
+    }
+  })();
+
+
+
   $(document).ready(function () {
+
+    Carrousel.init(); 
+
+    var $dateSelect = $("#date-selector")
+
+    $prev = $("#carrousel-nav-prev")
+    $next = $("#carrousel-nav-next")
+    $("#carrousel-nav-prev, #carrousel-nav-next").on("click", function () {
+      if (dateCounter === 0) {
+        $prev.addClass("invisible")
+        $("#date-selector").val("<%= localdate %>")
+        $("#date-selector").change()
+      }
+      else if (dateCounter === 1) {
+        $prev.removeClass("invisible")
+        $("#date-selector").val("<%= localdate - 1.days %>")
+        $("#date-selector").change()
+      }
+      else if (dateCounter === 2) {
+        $("#date-selector").val("<%= localdate - 2.days %>")
+        $("#date-selector").change()
+      }
+      else if (dateCounter === 3) {
+        $("#date-selector").val("<%= localdate - 3.days %>")
+        $("#date-selector").change()
+      }
+      else if (dateCounter === 4) {
+        $("#date-selector").val("<%= localdate - 4.days %>")
+        $("#date-selector").change()
+      }
+      else if (dateCounter === 5) {
+        $next.removeClass("invisible")
+        $("#date-selector").val("<%= localdate - 5.days %>")
+        $("#date-selector").change()
+      }
+      else if (dateCounter === 6) {
+        $next.addClass("invisible")
+        $("#date-selector").val("<%= localdate - 6.days %>")
+        $("#date-selector").change()
+      }
+
+
+    })
+
 
     var nextGoalCounter = 0
     var $addGoal = $("#add-goal-button")

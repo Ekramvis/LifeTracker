@@ -53,9 +53,6 @@ group :development do
 end
 
 gem 'devise'
-
 gem 'sendgrid'
-
 gem 'browser-timezone-rails'
-
 gem "font-awesome-rails"
