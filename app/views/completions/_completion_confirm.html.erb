@@ -13,6 +13,20 @@
   $(document).ready(function () {
     var $completedBox = $("#completed-task-<%= task_id %>")
 
+    var timesCompletedUpdate = function () {
+      $.ajax({
+        url: "<%= completions_path %>",
+        type: "get",
+        data: {
+          task_id: <%= task_id %>
+        },
+        success: function (data) {
+          var $timesCompleted = $("#times-completed-<%=task_id %>");
+          $timesCompleted.html(data);
+        }
+      })
+    }
+
     $completedBox.on("click", function () {
       $.ajax({
         url: "<%= completions_path %>",
@@ -26,6 +40,7 @@
           var $completedStatus = $("#completed-status-<%= task_id %>")
           $completedStatus.empty();
           $completedStatus.html(data)
+          timesCompletedUpdate();
 
           $.ajax({
             url: "/users/average_score",

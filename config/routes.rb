@@ -11,7 +11,7 @@ LifeTracker::Application.routes.draw do
     resources :completions
   end
 
-  resources :completions, only: [:new, :create, :destroy] 
+  resources :completions, only: [:new, :create, :destroy, :index] 
 
   match "/completions/completed", to: "completions#completed", via: [:post]
 

@@ -358,9 +358,13 @@ input:focus {
   border-bottom: 0px solid #D6D3DE; 
 }
 
-.completion-confirm > h2 {
+.completion-confirm > h2, .times-completed > h2 {
   color: #84E8BE;
 }
+/*
+.times-completed {
+  font-weight: bold;
+}*/
 
 .task-description {
   width: 300px;

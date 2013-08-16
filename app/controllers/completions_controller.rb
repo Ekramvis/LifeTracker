@@ -29,5 +29,18 @@ class CompletionsController < ApplicationController
     render partial: "completion_confirm", locals: {task_id: task_id, date_completed: date_completed}
   end
 
+  def index
+    if params[:task_id]
+      @task = Task.find(params[:task_id])
+      @completions_size = @task.completions.select { |completion| completion.date_completed >= (Time.now.in_time_zone.to_date - 7.days)}.size
+      if request.xhr? 
+        render partial: "total_for_task"
+      else
+        render :index
+      end
+    else
+      redirect_to root_url
+    end
+  end
 
 end 
